@@ -12,6 +12,24 @@ files:
   - name: build.gradle
     visible: true
     learner_created: false
+  - name: src/antifraud/controller/TransactionController.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/TransactionDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/TransactionService.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/TransactionServiceImpl.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/ValidationResult.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/projects/232/stages/1161/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sat, 19 Oct 2024 16:50:00 UTC"
 record: -1
