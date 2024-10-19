@@ -27,6 +27,36 @@ files:
   - name: src/antifraud/service/TransactionService.java
     visible: true
     learner_created: true
-feedback_link: https://hyperskill.org/projects/232/stages/1162/implement#comment
-status: Unchecked
+  - name: src/antifraud/controller/AuthController.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/UserDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/UserDetailsServiceImpl.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/UserRepository.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/entity/User.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/mapper/UserMapper.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/security/SecurityConfig.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/security/RestAuthenticationEntryPoint.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/exception/GlobalExceptionHandler.java
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/18068#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sat, 19 Oct 2024 19:24:51 UTC"
 record: -1
