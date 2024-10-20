@@ -4,6 +4,6 @@ import antifraud.model.TransactionDTO;
 
 import java.util.Map;
 
-public interface TransactionService {
+public interface AntiFraudService {
     Map<String, Object> validate(TransactionDTO transactionDTO);
 }

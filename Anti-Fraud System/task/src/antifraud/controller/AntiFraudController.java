@@ -2,7 +2,7 @@ package antifraud.controller;
 
 
 import antifraud.model.TransactionDTO;
-import antifraud.service.TransactionService;
+import antifraud.service.AntiFraudService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,16 +13,16 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/antifraud")
-public class TransactionController {
+public class AntiFraudController {
 
-    private final TransactionService transactionService;
+    private final AntiFraudService antiFraudService;
 
-    public TransactionController(TransactionService transactionService) {
-        this.transactionService = transactionService;
+    public AntiFraudController(AntiFraudService antiFraudService) {
+        this.antiFraudService = antiFraudService;
     }
 
     @PostMapping("/transaction")
     public Map<String, Object> validateTransaction(@RequestBody @Validated TransactionDTO transactionDTO) {
-        return transactionService.validate(transactionDTO);
+        return antiFraudService.validate(transactionDTO);
     }
 }

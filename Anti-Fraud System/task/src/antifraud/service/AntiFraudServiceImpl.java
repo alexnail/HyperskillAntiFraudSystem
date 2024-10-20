@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
-public class TransactionServiceImpl implements TransactionService {
+public class AntiFraudServiceImpl implements AntiFraudService {
     @Override
     public Map<String, Object> validate(TransactionDTO transactionDTO) {
         if (transactionDTO.amount() <= 200) {

@@ -13,10 +13,10 @@ files:
   - name: test/AntiFraudTest.java
     visible: false
     learner_created: false
-  - name: src/antifraud/service/TransactionServiceImpl.java
+  - name: src/antifraud/service/AntiFraudServiceImpl.java
     visible: true
     learner_created: true
-  - name: src/antifraud/controller/TransactionController.java
+  - name: src/antifraud/controller/AntiFraudController.java
     visible: true
     learner_created: true
   - name: src/antifraud/security/SecurityConfig.java
@@ -61,7 +61,7 @@ files:
   - name: src/antifraud/model/TransactionDTO.java
     visible: true
     learner_created: true
-  - name: src/antifraud/service/TransactionService.java
+  - name: src/antifraud/service/AntiFraudService.java
     visible: true
     learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18070#comment
