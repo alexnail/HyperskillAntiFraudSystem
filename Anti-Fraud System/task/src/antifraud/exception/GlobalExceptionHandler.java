@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity handleRuntimeException(RuntimeException e) {
-        if (e.getMessage().equals("Username already exists")) {
+        if (e.getMessage().equals("Username already exists") || e.getMessage().equals("Role already assigned")) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
 

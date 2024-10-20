@@ -54,6 +54,18 @@ files:
   - name: src/antifraud/service/TransactionService.java
     visible: true
     learner_created: true
+  - name: src/antifraud/security/UserRole.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/UserRoleDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/UserAccessDTO.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18069#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sun, 20 Oct 2024 17:14:34 UTC"
 record: -1

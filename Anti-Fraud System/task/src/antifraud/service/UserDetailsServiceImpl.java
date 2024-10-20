@@ -1,9 +1,12 @@
 package antifraud.service;
 
 import antifraud.entity.User;
+import antifraud.model.UserAccessDTO;
 import antifraud.model.UserDTO;
+import antifraud.model.UserRoleDTO;
 import antifraud.model.mapper.UserMapper;
 import antifraud.repository.UserRepository;
+import antifraud.security.UserRole;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -38,6 +41,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (existing.isPresent()) {
             throw new RuntimeException("Username already exists");
         }
+        if (userRepository.count() == 0) {
+            userDTO.setRole(UserRole.ADMINISTRATOR);
+        } else {
+            userDTO.setRole(UserRole.MERCHANT);
+            userDTO.setLocked(true);
+        }
         var saved = userRepository.save(userMapper.toEntity(userDTO));
         return userMapper.toDto(saved);
     }
@@ -53,5 +62,25 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         var user = userRepository.findUserByUsernameIgnoreCase(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
         userRepository.deleteUserByUsernameIgnoreCase(username);
+    }
+
+    @Transactional
+    public UserDTO setUserRole(UserRoleDTO roleDTO) {
+        var user = userRepository.findUserByUsernameIgnoreCase(roleDTO.username())
+                .orElseThrow(() -> new UsernameNotFoundException(roleDTO.username()));
+        if (roleDTO.role().equals(user.getRole().name())) {
+            throw new RuntimeException("Role already assigned");
+        }
+        user.setRole(UserRole.valueOf(roleDTO.role()));
+        return userMapper.toDto(userRepository.save(user));
+    }
+
+    @Transactional
+    public String changeUserAccess(UserAccessDTO accessDTO) {
+        var user = userRepository.findUserByUsernameIgnoreCase(accessDTO.username())
+                .orElseThrow(() -> new UsernameNotFoundException(accessDTO.username()));
+        user.setLocked(accessDTO.operation().equals("LOCK"));
+        var saved = userRepository.save(user);
+        return saved.isLocked() ? "locked" : "unlocked";
     }
 }

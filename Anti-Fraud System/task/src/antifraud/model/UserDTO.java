@@ -1,6 +1,8 @@
 package antifraud.model;
 
 
+import antifraud.model.mapper.UserMapper;
+import antifraud.security.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotEmpty;
@@ -34,6 +36,11 @@ public class UserDTO implements UserDetails {
     private List<? extends GrantedAuthority> authorities;
 
     @JsonIgnore
+    private boolean locked;
+
+    private UserRole role;
+
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -48,7 +55,7 @@ public class UserDTO implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !locked;
     }
 
     @JsonIgnore
@@ -61,5 +68,10 @@ public class UserDTO implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+        authorities = List.of(UserMapper.roleToAuthority(role));
     }
 }

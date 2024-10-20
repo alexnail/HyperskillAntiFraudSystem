@@ -1,5 +1,6 @@
 package antifraud.entity;
 
+import antifraud.security.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,4 +20,9 @@ public class User {
     private String username;
 
     private String password;
+
+    private boolean locked;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 }

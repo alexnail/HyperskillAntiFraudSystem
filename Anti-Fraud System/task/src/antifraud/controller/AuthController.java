@@ -1,6 +1,8 @@
 package antifraud.controller;
 
+import antifraud.model.UserAccessDTO;
 import antifraud.model.UserDTO;
+import antifraud.model.UserRoleDTO;
 import antifraud.service.UserDetailsServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +37,16 @@ public class AuthController {
         userDetailsService.deleteUser(username);
         return Map.of("username", username,
                 "status", "Deleted successfully!");
+    }
+
+    @PutMapping("/role")
+    public UserDTO setUserRole(@RequestBody @Validated UserRoleDTO userRoleDTO) {
+        return userDetailsService.setUserRole(userRoleDTO);
+    }
+
+    @PutMapping("/access")
+    public Map<String, Object> changeUserAccess(@RequestBody @Validated UserAccessDTO userAccessDTO) {
+        String status = userDetailsService.changeUserAccess(userAccessDTO);
+        return Map.of("status", "User %s %s!".formatted(userAccessDTO.username(), status));
     }
 }
