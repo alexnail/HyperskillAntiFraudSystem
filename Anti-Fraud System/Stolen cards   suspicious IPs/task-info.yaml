@@ -13,6 +13,57 @@ files:
   - name: test/AntiFraudTest.java
     visible: false
     learner_created: false
+  - name: src/antifraud/service/TransactionServiceImpl.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/controller/TransactionController.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/security/SecurityConfig.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/security/RestAuthenticationEntryPoint.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/UserRoleDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/UserRepository.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/entity/User.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/ValidationResult.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/exception/GlobalExceptionHandler.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/controller/AuthController.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/UserDetailsServiceImpl.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/security/UserRole.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/mapper/UserMapper.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/UserDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/UserAccessDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/TransactionDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/TransactionService.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18070#comment
 status: Unchecked
 record: -1
