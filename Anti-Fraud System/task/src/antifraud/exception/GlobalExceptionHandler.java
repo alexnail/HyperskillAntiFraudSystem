@@ -14,7 +14,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity handleRuntimeException(RuntimeException e) {
-        if (e.getMessage().equals("Username already exists") || e.getMessage().equals("Role already assigned")) {
+        if (e.getMessage().equals("Username already exists")
+                || e.getMessage().equals("Role already assigned")
+                || e.getMessage().equals("IP already exists")
+                || e.getMessage().equals("Card already exists")) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
 
@@ -24,12 +27,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BindException.class)
     public ResponseEntity handleBindException(BindException e) {
-        //log.debug(e.getMessage(), e);
+        log.debug(e.getMessage(), e);
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public ResponseEntity handleUsernameNotFoundException(UsernameNotFoundException e) {
+    @ExceptionHandler({IpNotFoundException.class, UsernameNotFoundException.class, StolenCardNotFound.class})
+    public ResponseEntity handleIpNotFoundException(RuntimeException e) {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 }

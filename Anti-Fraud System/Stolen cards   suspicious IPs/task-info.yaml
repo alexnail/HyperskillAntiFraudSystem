@@ -64,6 +64,48 @@ files:
   - name: src/antifraud/service/AntiFraudService.java
     visible: true
     learner_created: true
+  - name: src/antifraud/model/SuspiciousIpDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/entity/SuspiciousIp.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/mapper/SuspiciousIpMapper.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/SuspiciousIpRepository.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/exception/IpNotFoundException.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/ValidationResultDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/StolenCardDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/StolenCardRepository.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/entity/StolenCard.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/mapper/StolenCardMapper.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/exception/StolenCardNotFound.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/ValidCardNumber.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/CardNumberValidator.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18070#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sat, 02 Nov 2024 13:30:50 UTC"
 record: -1

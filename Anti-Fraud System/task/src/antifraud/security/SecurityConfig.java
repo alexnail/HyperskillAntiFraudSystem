@@ -38,6 +38,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/antifraud/transaction").hasRole("MERCHANT")
                         .requestMatchers(HttpMethod.PUT, "/api/auth/access/**").hasRole("ADMINISTRATOR")
                         .requestMatchers(HttpMethod.PUT, "/api/auth/role/**").hasRole("ADMINISTRATOR")
+                        .requestMatchers(HttpMethod.POST, "/api/antifraud/suspicious-ip/**").hasRole("SUPPORT")
+                        .requestMatchers(HttpMethod.DELETE, "/api/antifraud/suspicious-ip/**").hasRole("SUPPORT")
+                        .requestMatchers(HttpMethod.GET, "/api/antifraud/suspicious-ip/**").hasRole("SUPPORT")
+                        .requestMatchers(HttpMethod.POST, "/api/antifraud/stolencard/**").hasRole("SUPPORT")
+                        .requestMatchers(HttpMethod.DELETE, "/api/antifraud/stolencard/**").hasRole("SUPPORT")
+                        .requestMatchers(HttpMethod.GET, "/api/antifraud/stolencard/**").hasRole("SUPPORT")
                         .anyRequest().denyAll()
                 )
                 .sessionManagement(session -> session
