@@ -1,5 +1,6 @@
 package antifraud.service;
 
+import antifraud.entity.Transaction;
 import antifraud.exception.IpNotFoundException;
 import antifraud.exception.StolenCardNotFound;
 import antifraud.model.StolenCardDTO;
@@ -8,8 +9,11 @@ import antifraud.model.TransactionDTO;
 import antifraud.model.ValidationResultDTO;
 import antifraud.model.mapper.StolenCardMapper;
 import antifraud.model.mapper.SuspiciousIpMapper;
+import antifraud.model.mapper.TransactionMapper;
 import antifraud.repository.StolenCardRepository;
 import antifraud.repository.SuspiciousIpRepository;
+import antifraud.repository.TransactionRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +23,7 @@ import java.util.stream.Stream;
 
 import static antifraud.service.ValidationResult.getStrictest;
 
+@Slf4j
 @Service
 public class AntiFraudServiceImpl implements AntiFraudService {
 
@@ -28,29 +33,36 @@ public class AntiFraudServiceImpl implements AntiFraudService {
     private final StolenCardRepository stolenCardRepository;
     private final StolenCardMapper stolenCardMapper;
 
+    private final TransactionRepository transactionRepository;
+    private final TransactionMapper transactionMapper;
+
     public AntiFraudServiceImpl(SuspiciousIpRepository suspiciousIpRepository, SuspiciousIpMapper suspiciousIpMapper,
-                                StolenCardRepository stolenCardRepository, StolenCardMapper stolenCardMapper) {
+                                StolenCardRepository stolenCardRepository, StolenCardMapper stolenCardMapper,
+                                TransactionRepository transactionRepository, TransactionMapper transactionMapper) {
         this.suspiciousIpRepository = suspiciousIpRepository;
         this.suspiciousIpMapper = suspiciousIpMapper;
         this.stolenCardRepository = stolenCardRepository;
         this.stolenCardMapper = stolenCardMapper;
+        this.transactionRepository = transactionRepository;
+        this.transactionMapper = transactionMapper;
     }
 
     @Override
     public ValidationResultDTO validate(TransactionDTO transactionDTO) {
+        transactionRepository.save(transactionMapper.toEntity(transactionDTO));
+
         var ipValidationResult = validateIp(transactionDTO.ip());
-
         var cardValidationResult = validateCard(transactionDTO.number());
-
         var amountValidationResult = validateAmount(transactionDTO.amount());
+        var ipCorrelationValidationResult = validateIpCorrelation(transactionDTO);
+        var regionCorrelationValidationResult = validateRegionCorrelation(transactionDTO);
 
-        return combineValidationResults(ipValidationResult, cardValidationResult, amountValidationResult);
+        return combineValidationResults(ipValidationResult, cardValidationResult, amountValidationResult,
+                ipCorrelationValidationResult, regionCorrelationValidationResult);
     }
 
-    private ValidationResultDTO combineValidationResults(ValidationResultDTO ipValidationResult,
-                                                         ValidationResultDTO cardValidationResult,
-                                                         ValidationResultDTO amountValidationResult) {
-        var aggregatedResults = Stream.of(ipValidationResult, cardValidationResult, amountValidationResult)
+    private ValidationResultDTO combineValidationResults(ValidationResultDTO... results) {
+        var aggregatedResults = Stream.of(results)
                 .collect(Collectors.groupingBy(ValidationResultDTO::result));
         var strictestResultKey = getStrictest(aggregatedResults.keySet());
         var strictest = aggregatedResults.get(strictestResultKey);
@@ -60,6 +72,44 @@ public class AntiFraudServiceImpl implements AntiFraudService {
                         .distinct()
                         .sorted()
                         .collect(Collectors.joining(", ")));
+    }
+
+    private ValidationResultDTO validateRegionCorrelation(TransactionDTO transactionDTO) {
+        var found = transactionRepository.findAllByNumber(transactionDTO.number());
+
+        var uniqueRegions = found.stream()
+                .filter(t -> !t.getRegion().equals(transactionDTO.region()))
+                .filter(t -> t.getDate().isAfter(transactionDTO.date().minusHours(1))
+                        && t.getDate().isBefore(transactionDTO.date()) )
+                .map(Transaction::getRegion)
+                .collect(Collectors.toSet());
+
+        if (uniqueRegions.size() > 2) {
+            return new ValidationResultDTO(ValidationResult.PROHIBITED, "region-correlation");
+        } else if (uniqueRegions.size() == 2) {
+            return new ValidationResultDTO(ValidationResult.MANUAL_PROCESSING, "region-correlation");
+        } else {
+            return new ValidationResultDTO(ValidationResult.ALLOWED, "none");
+        }
+    }
+
+    private ValidationResultDTO validateIpCorrelation(TransactionDTO transactionDTO) {
+        var found = transactionRepository.findAllByNumber(transactionDTO.number());
+
+        var uniqueIps = found.stream()
+                .filter(t -> !t.getIp().equals(transactionDTO.ip()))
+                .filter(t -> t.getDate().isAfter(transactionDTO.date().minusHours(1))
+                        && t.getDate().isBefore(transactionDTO.date()))
+                .map(Transaction::getIp)
+                .collect(Collectors.toSet());
+
+        if (uniqueIps.size() > 2) {
+            return new ValidationResultDTO(ValidationResult.PROHIBITED, "ip-correlation");
+        } else if (uniqueIps.size() == 2) {
+            return new ValidationResultDTO(ValidationResult.MANUAL_PROCESSING, "ip-correlation");
+        } else {
+            return new ValidationResultDTO(ValidationResult.ALLOWED, "none");
+        }
     }
 
     private ValidationResultDTO validateIp(String ip) {

@@ -102,6 +102,24 @@ files:
   - name: src/antifraud/model/StolenCardDTO.java
     visible: true
     learner_created: true
+  - name: src/antifraud/entity/Transaction.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/TransactionRepository.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/mapper/TransactionMapper.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/ValidRegion.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/RegionValidator.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18071#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sat, 02 Nov 2024 19:40:07 UTC"
 record: -1
