@@ -12,6 +12,111 @@ files:
   - name: test/AntiFraudTest.java
     visible: false
     learner_created: false
+  - name: src/antifraud/model/mapper/TransactionMapper.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/security/RestAuthenticationEntryPoint.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/exception/StolenCardNotFound.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/ValidationResultDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/UserRoleDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/UserRepository.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/entity/Transaction.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/ValidCardNumber.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/UserDetailsServiceImpl.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/entity/SuspiciousIp.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/entity/StolenCard.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/mapper/StolenCardMapper.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/exception/IpNotFoundException.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/ValidRegion.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/mapper/UserMapper.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/UserDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/StolenCardRepository.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/UserAccessDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/TransactionDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/AntiFraudServiceImpl.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/mapper/SuspiciousIpMapper.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/SuspiciousIpDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/security/SecurityConfig.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/SuspiciousIpRepository.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/AntiFraudService.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/CardNumberValidator.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/controller/AntiFraudController.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/entity/User.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/service/ValidationResult.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/exception/GlobalExceptionHandler.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/controller/AuthController.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/RegionValidator.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/security/UserRole.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/TransactionRepository.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/StolenCardDTO.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18072#comment
 status: Unchecked
 record: -1
