@@ -117,6 +117,34 @@ files:
   - name: src/antifraud/model/StolenCardDTO.java
     visible: true
     learner_created: true
+  - name: src/antifraud/model/TransactionFeedbackOutDTO.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/model/TransactionFeedbackInDto.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/EnumConstraint.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/validation/EnumValidator.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/exception/TransactionNotFoundException.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/exception/FeedbackEqualToResultException.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/entity/CardLimits.java
+    visible: true
+    learner_created: true
+  - name: src/antifraud/repository/CardLimitsRepository.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18072#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">Hyperskill</a>
+    to continue learning.
+  time: "Sat, 09 Nov 2024 15:39:11 UTC"
 record: -1

@@ -11,4 +11,6 @@ import java.util.List;
 public interface TransactionRepository extends CrudRepository<Transaction, Long> {
 
     List<Transaction> findAllByNumber(@NotEmpty String number);
+
+    List<Transaction> findAllByOrderByIdAsc();
 }

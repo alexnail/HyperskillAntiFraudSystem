@@ -1,9 +1,6 @@
 package antifraud.service;
 
-import antifraud.model.StolenCardDTO;
-import antifraud.model.SuspiciousIpDTO;
-import antifraud.model.TransactionDTO;
-import antifraud.model.ValidationResultDTO;
+import antifraud.model.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -28,4 +25,13 @@ public interface AntiFraudService {
 
     @Transactional
     void removeStolenCard(String number);
+
+    @Transactional
+    TransactionFeedbackOutDTO addFeedback(TransactionFeedbackInDto feedbackIn);
+
+    @Transactional(readOnly = true)
+    List<TransactionFeedbackOutDTO> getTransactionsHistory();
+
+    @Transactional(readOnly = true)
+    List<TransactionFeedbackOutDTO> getTransactionHistory(String number);
 }

@@ -1,13 +1,11 @@
 package antifraud.controller;
 
 
-import antifraud.model.StolenCardDTO;
-import antifraud.model.SuspiciousIpDTO;
-import antifraud.model.TransactionDTO;
-import antifraud.model.ValidationResultDTO;
+import antifraud.model.*;
 import antifraud.service.AntiFraudService;
 import antifraud.validation.ValidCardNumber;
 import jakarta.validation.constraints.Pattern;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +15,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/antifraud")
 @Validated
+@Slf4j
 public class AntiFraudController {
 
     private final AntiFraudService antiFraudService;
@@ -28,6 +27,21 @@ public class AntiFraudController {
     @PostMapping("/transaction")
     public ValidationResultDTO validateTransaction(@RequestBody @Validated TransactionDTO transactionDTO) {
         return antiFraudService.validate(transactionDTO);
+    }
+
+    @PutMapping("/transaction")
+    public TransactionFeedbackOutDTO addTransactionFeedback(@RequestBody @Validated TransactionFeedbackInDto feedbackIn) {
+        return antiFraudService.addFeedback(feedbackIn);
+    }
+
+    @GetMapping("/history")
+    public List<TransactionFeedbackOutDTO> getTransactionHistory() {
+        return antiFraudService.getTransactionsHistory();
+    }
+
+    @GetMapping("/history/{number}")
+    public List<TransactionFeedbackOutDTO> getTransactionHistory(@PathVariable @ValidCardNumber String number) {
+        return antiFraudService.getTransactionHistory(number);
     }
 
     @PostMapping("/suspicious-ip")
@@ -66,7 +80,5 @@ public class AntiFraudController {
         antiFraudService.removeStolenCard(number);
         return Map.of("status", "Card %s successfully removed!".formatted(number));
     }
-
-
 }
 

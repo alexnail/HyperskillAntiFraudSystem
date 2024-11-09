@@ -1,5 +1,6 @@
 package antifraud.entity;
 
+import antifraud.service.ValidationResult;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,4 +28,10 @@ public class Transaction {
     private String region;
 
     private LocalDateTime date;
+
+    @Enumerated(EnumType.STRING)
+    private ValidationResult result;
+
+    @Enumerated(EnumType.STRING)
+    private ValidationResult feedback;
 }

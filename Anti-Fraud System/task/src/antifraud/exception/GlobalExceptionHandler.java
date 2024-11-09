@@ -17,7 +17,8 @@ public class GlobalExceptionHandler {
         if (e.getMessage().equals("Username already exists")
                 || e.getMessage().equals("Role already assigned")
                 || e.getMessage().equals("IP already exists")
-                || e.getMessage().equals("Card already exists")) {
+                || e.getMessage().equals("Card already exists")
+                || e.getMessage().equals("Feedback already exists")) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
 
@@ -31,8 +32,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({IpNotFoundException.class, UsernameNotFoundException.class, StolenCardNotFound.class})
+    @ExceptionHandler({IpNotFoundException.class, UsernameNotFoundException.class,
+            StolenCardNotFound.class, TransactionNotFoundException.class})
     public ResponseEntity handleIpNotFoundException(RuntimeException e) {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FeedbackEqualToResultException.class)
+    public ResponseEntity handleFeedbackEqualToResultException(FeedbackEqualToResultException e) {
+        return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
